@@ -13,11 +13,11 @@
           <form method="POST" action="{{ route('album.store') }}" enctype="multipart/form-data">
           @csrf
             <div class="form-group">
-              <label for="formGroupExampleInput">Title</label>
+              <label for="formGroupExampleInput">AlbumTitle</label>
               <input type="text" class="form-control" name="title">
             </div>
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">Text</label>
+              <label for="exampleFormControlTextarea1">Explanation</label>
               <textarea name="text" class="form-control"></textarea>
               <br>
               <input id="albumimage" type="file" name="albumimage">
