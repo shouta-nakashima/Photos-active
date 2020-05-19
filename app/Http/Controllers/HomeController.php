@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Album;
+
+use Illuminate\Support\Facades\Storage;
+
 class HomeController extends Controller
 {
     /**
@@ -23,6 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $albums = Album::all();
+        return view('home', ['albums'=>$albums]);
+        
     }
 }

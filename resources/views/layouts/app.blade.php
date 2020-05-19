@@ -31,7 +31,7 @@
             /* text-shadow: 3px -3px 1px whitesmoke;  */
             text-align: center;
             font-size: 55px;
-            padding-top: 70px;
+            margin-top: 100px;
         }
 
         h6 {
@@ -66,7 +66,7 @@
 
         .card-header {
             text-align: center;
-            background: #3ccace;
+            background: darkgrey;
             color: white;
             font-size: 25px;
         }
@@ -122,18 +122,22 @@
         }
 
         .justify-content-center {
-            margin: 80px 0 0px 0;
+            margin: 120px 0 0px 0;
             
         }
 
         .btn-group{
             float: right;
-            padding-right: 150px;
+           padding-right: 80px;
            
         }
         .dropdown-menu.show{
             z-index: 200;
         }
+
+       .btn.btn-outline-success {
+           float: right;
+       }
 
     </style>
 
@@ -170,8 +174,13 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }} 
                                 </a> 
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('album.index')}}">{{ __('Album’s Create') }}</a>
+                                </li>
+                                
                                 <a class="nav-link dropdown-toggle" href="#"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
