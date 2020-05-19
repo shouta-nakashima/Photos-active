@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/album', 'AlbumController@index')->name('album.index');
+Route::post('/album', 'AlbumController@store')->name('album.store');
+Route::get('/album/show/{id}', 'AlbumController@show')->name('album.show');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
