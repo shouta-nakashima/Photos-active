@@ -122,7 +122,7 @@
         }
 
         .justify-content-center {
-            margin: 120px 0 0px 0;
+            margin: 80px 0 0px 0;
             
         }
 

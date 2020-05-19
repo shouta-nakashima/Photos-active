@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Photo;
+
 use App\Album;
-use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
 
-class AlbumController extends Controller
+use Illuminate\Http\Request;
+
+class PhotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +19,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::all();
-        return view('album/index', ['albums'=>$albums]);
+        //
     }
 
     /**
@@ -25,9 +27,9 @@ class AlbumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($album_id)
     {
-        //
+        return view('photo.create')->with('album_id', $album_id);
     }
 
     /**
@@ -38,42 +40,42 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'title' => 'required',
             'text' => 'required',
             
         ]);
 
-        $album = new Album();
-        $uploadImg = $album->albumimage = $request->file('albumimage');
-        $path = Storage::disk('s3')->putFile('/albums', $uploadImg, 'public');
-        $album->albumimage = Storage::disk('s3')->url($path);
-        $album->title = $request->title;
-        $album->text = $request->text;
-        $album->save();
-        return redirect('/home');
+        $photos = new Photo();
+        $photoImg = $photos->photoimage = $request->file('photoimage');
+        $path = Storage::disk('s3')->putFile('/photos', $photoImg, 'public');
+        $photos->photoimage = Storage::disk('s3')->url($path);
+        $photos->title = $request->title;
+        $photos->text = $request->text;
+        $photos->album_id = $request->input('album_id');
+        $photos->save();
+        return redirect('/album/show/'.$request->input('album_id'))->with('success', '投稿が完了しました。');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Album  $album
+     * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $album = Album::with('photos')->find($id);
-        return view('album.show')->with('album',$album);
+        $photo = Photo::find($id);
+        return view('photo.show')->with('photo',$photo);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Album  $album
+     * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Album $album)
+    public function edit(Photo $photo)
     {
         //
     }
@@ -82,10 +84,10 @@ class AlbumController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Album  $album
+     * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Album $album)
+    public function update(Request $request, Photo $photo)
     {
         //
     }
@@ -93,10 +95,10 @@ class AlbumController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Album  $album
+     * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Album $album)
+    public function destroy(Photo $photo)
     {
         //
     }
