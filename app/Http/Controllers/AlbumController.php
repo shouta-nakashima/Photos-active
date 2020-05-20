@@ -42,6 +42,7 @@ class AlbumController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'text' => 'required',
+            'albumimage' => 'required',
             
         ]);
 
@@ -73,9 +74,10 @@ class AlbumController extends Controller
      * @param  \App\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function edit(Album $album)
+    public function edit($id)
     {
-        //
+        $album = Album::find($id);
+        return view('album.edit' , ['album'=>$album]);
     }
 
     /**
@@ -85,9 +87,23 @@ class AlbumController extends Controller
      * @param  \App\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Album $album)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'text' => 'required',
+            'albumimage' => 'required',
+            
+        ]);
+
+        $album = Album::find($id);
+        $uploadImg = $album->albumimage = $request->file('albumimage');
+        $path = Storage::disk('s3')->putFile('/albums', $uploadImg, 'public');
+        $album->albumimage = Storage::disk('s3')->url($path);
+        $album->title = $request->title;
+        $album->text = $request->text;
+        $album->save();
+        return redirect('/home');
     }
 
     /**
@@ -96,8 +112,12 @@ class AlbumController extends Controller
      * @param  \App\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Album $album)
+    public function destroy($id)
     {
-        //
+        $disk = Storage::disk('s3');
+        $disk->delete($id);
+        $album = Album::find($id);
+        $album->delete();
+        return redirect('/home');
     }
 }

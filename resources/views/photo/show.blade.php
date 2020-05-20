@@ -19,6 +19,11 @@
                     <div class="card-body">
                         <p class="card-text">{{ $photo->text}}</p>
                         <a class="btn btn-outline-secondary" href="/album/show/{{ $photo->album_id }}" >Back To Page</a>
+                        <form method="POST" action="{{ route('photo.destroy', ['id'=> $photo->id] ) }}" id="delete_{{ $photo->id}}">
+                        @csrf
+                        <a class="btn btn-outline-secondary" href="{{ route('photo.edit', ['id'=>$photo->id]) }}" >Edit</a>
+                        <a href="#" class="btn btn-outline-danger" data-id="{{ $photo->id }}" onclick="deletePost(this);" >削除する</a>
+                        </form>
                       
                     </div>
                 </div>
@@ -26,4 +31,20 @@
         </div>
     </div>
 </div>
+
+<script>
+// <!--//
+// /************************************
+// 削除ボタンを押してすぐにレコードが削除
+// されるのも問題なので、一旦javascriptで
+// 確認メッセージを流します。
+// *************************************/
+// //-->
+function deletePost(e) {
+    'use strict';
+    if (confirm('本当に削除していいですか?')) {
+    document.getElementById('delete_' + e.dataset.id).submit();
+    }
+}
+</script>
 @endsection

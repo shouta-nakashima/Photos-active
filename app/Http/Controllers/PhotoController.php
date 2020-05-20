@@ -43,6 +43,8 @@ class PhotoController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'text' => 'required',
+            'photoimage' => 'required',
+
             
         ]);
 
@@ -75,9 +77,10 @@ class PhotoController extends Controller
      * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Photo $photo)
+    public function edit($id)
     {
-        //
+        $photo = Photo::find($id);
+        return view('photo.edit' , ['photo'=>$photo]);
     }
 
     /**
@@ -87,9 +90,24 @@ class PhotoController extends Controller
      * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Photo $photo)
+    public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'title' => 'required',
+            'text' => 'required',
+            'photoimage' => 'required',
+            
+        ]);
+        $photos = Photo::find($id);
+        $photoImg = $photos->photoimage = $request->file('photoimage');
+        $path = Storage::disk('s3')->putFile('/photos', $photoImg, 'public');
+        $photos->photoimage = Storage::disk('s3')->url($path);
+        $photos->title = $request->title;
+        $photos->text = $request->text;
+
+        $photos->save();
+        return redirect('/home')->with('success', '投稿が完了しました。');
     }
 
     /**
@@ -98,8 +116,11 @@ class PhotoController extends Controller
      * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Photo $photo)
+    public function destroy($id)
     {
-        //
+        
+        $photo = Photo::find($id);
+        $photo->delete();
+        return redirect('/home');
     }
 }

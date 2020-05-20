@@ -128,8 +128,8 @@ return [
         'caution'=>'注意事項', //追記
         'text'=>'本文',
         'title'=>'タイトル',
-        'photo'=>'画像',
-        'image'=>'画像',
+        'photoimage'=>'写真',
+        'albumimage'=>'写真',
     ],
 
 ];

@@ -19,6 +19,10 @@
                       
                         <a class="btn btn-outline-success" href="/photo/create/{{ $album->id }}" >Add To Photo</a>
                         <a class="btn btn-outline-secondary" href="{{ route('home') }}" >Back To Home</a>
+                        <form method="POST" action="{{ route('album.destroy', ['id'=> $album->id] ) }}" id="delete_{{ $album->id}}">
+                        @csrf
+                        <a class="btn btn-outline-secondary" href="{{ route('album.edit', ['id'=>$album->id]) }}" >Edit</a>
+                        </form>
                       
                     </div>
                 </div>
@@ -38,4 +42,21 @@
     @endforeach
     </div>
 </div>
+<script>
+// <!--//
+// /************************************
+// 削除ボタンを押してすぐにレコードが削除
+// されるのも問題なので、一旦javascriptで
+// 確認メッセージを流します。
+// *************************************/
+// //-->
+function deletePost(e) {
+    'use strict';
+    if (confirm('本当に削除していいですか?')) {
+    document.getElementById('delete_' + e.dataset.id).submit();
+    }
+}
+</script>
+
+
 @endsection
