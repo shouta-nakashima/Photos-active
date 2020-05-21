@@ -22,6 +22,7 @@
                         <form method="POST" action="{{ route('album.destroy', ['id'=> $album->id] ) }}" id="delete_{{ $album->id}}">
                         @csrf
                         <a class="btn btn-outline-secondary" href="{{ route('album.edit', ['id'=>$album->id]) }}" >Edit</a>
+                        <a href="#" class="btn btn-outline-danger" data-id="{{ $album->id }}" onclick="deletePost(this);" >削除する</a>
                         </form>
                       
                     </div>
@@ -52,7 +53,7 @@
 // //-->
 function deletePost(e) {
     'use strict';
-    if (confirm('本当に削除していいですか?')) {
+    if (confirm('削除すると、Album内のPhotoは削除されます。削除していいですか?')) {
     document.getElementById('delete_' + e.dataset.id).submit();
     }
 }
