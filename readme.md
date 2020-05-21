@@ -1,72 +1,44 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# はじめに
+このサイトは自身のスキルアップのため、Laravel/PHPにて初めて作成したアプリです。少々荒い所もございますが、今後随時更新していく予定ですのでご了承ください。
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+# Photos-active
 
-## About Laravel
+### Overview
+- 写真、画像をAlbumとして投稿出来る
+- Albumの中にPhotoを複数枚投稿できる
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Production environment（本番環境）
+- デプロイ：heroku
+- アップロード用バケット：S3
+- [こちらからご覧いただけます](http://18.177.93.163/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Background
+- 自身の家族で共有できるアルバムを作りたいと思い作成に至りました。
 
-## Learning Laravel
+### :Function
+- ログイン、新規登録後、Albumが投稿可能
+- Album内にPhotoとして画像、写真を複数枚投稿出来る
+- Album、Photoは編集、削除することが出来る
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Devise（工夫点）
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- レスポンシブデザイン。（LaravelUIでBootstrapを使用）
 
-## Laravel Sponsors
+### Difficulties（苦労点）
+- 当初作成していた内容が本番環境に画像アップロード出来なかったので、S3に変更した所
+- リレーションがrailsと多少違うので、調べていくのに時間を要した
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 作成して良かったと思う所
+- 今回Laravelにて初めて作成しましたが、自分なりにLaravelの基礎が学べたと思います。
+- PhotosActive（本サイト）は家族で使用する前提で作成しましたが、次回は、もっと多くのユーザーに使っていただけるようなアプリを作成したいと思いました。
+### アプリイメージ
+#### ログイン、新規登録
+![](https://i.gyazo.com/a4198db835c81fdeca699984bac3320c.jpg)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
+#### Album一覧表示
+![](https://i.gyazo.com/63e14ce089ae2949852b2aa2219e3930.jpg)
 
-## Contributing
+## 最後に
+- 最後までご覧いただいてありがとうございます！！今後も技術アップをしっかり行い、より良い開発が出来るようにしていきます。ありがとうございました！！！
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
